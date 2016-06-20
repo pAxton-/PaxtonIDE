@@ -1,5 +1,7 @@
 package pax.view;
 
+import org.fife.ui.rtextarea.RTextScrollPane;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -11,7 +13,10 @@ public class EditorFrame extends JInternalFrame {
     /**
      * Fields for the JTabbedPane
      */
-    private JTabbedPane pane = new JTabbedPane();
+    private RTextScrollPane pane = new RTextScrollPane ();
+    private JTabbedPane tabbedPane = new JTabbedPane();
+
+
     /**
      * Create the instance of the class
      */
@@ -38,11 +43,13 @@ public class EditorFrame extends JInternalFrame {
         setMaximizable(true);
         setResizable(true);
         setClosable(false);
-        setName("Editor");
+        setTitle("Editor");
         setMinimumSize(new Dimension(200,200));
         setPreferredSize(new Dimension(800, 600));
         setLocation(200,0);
+
         addFile("default");
+        pane.getViewport().add(tabbedPane);
         add(pane);
         pack();
     }
@@ -51,7 +58,9 @@ public class EditorFrame extends JInternalFrame {
      * Add files to this EditorFrame
      * @param filename
      */
-    public void addFile(String filename) {
-        pane.addTab(filename, new EditorFile());
+    public void addFile(String filename)
+    {
+        tabbedPane.add(filename, new EditorFile());
+
     }
 }

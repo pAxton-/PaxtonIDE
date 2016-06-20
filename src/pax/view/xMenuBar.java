@@ -1,8 +1,6 @@
 package pax.view;
 
 import javax.swing.*;
-import javax.swing.event.MenuEvent;
-import javax.swing.event.MenuListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
@@ -43,6 +41,11 @@ public class xMenuBar extends JMenuBar {
      * MenuItem for window menu to show Editor window
      */
     JCheckBoxMenuItem showEditor = new JCheckBoxMenuItem("Editor Window");
+
+    /**
+     * Create be sqf file
+     */
+    JMenuItem newSqf = new JMenuItem("New SQF file");
 
     /**
      * Create the instance of the class
@@ -104,6 +107,14 @@ public class xMenuBar extends JMenuBar {
                 if (e.getStateChange() == ItemEvent.SELECTED){
                     EditorFrame.getInstance().setVisible(true);
                 }
+            }
+        });
+
+        file.add(newSqf);
+        newSqf.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                EditorFrame.getInstance().addFile("new");
             }
         });
     }
