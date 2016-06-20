@@ -19,10 +19,10 @@ public class ProjectTreeFrame extends JInternalFrame{
         setDefaultCloseOperation(HIDE_ON_CLOSE);
         setMaximizable(true);
         setResizable(true);
-        setClosable(true);
+        setClosable(false);
         setName("Editor");
         setMinimumSize(new Dimension(200,200));
-        setPreferredSize(new Dimension(800, 600));
+        setPreferredSize(new Dimension(200, 500));
         tree = new ProjectTree();
         add(tree);
         pack();

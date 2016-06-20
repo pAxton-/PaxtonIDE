@@ -37,10 +37,11 @@ public class EditorFrame extends JInternalFrame {
         setDefaultCloseOperation(HIDE_ON_CLOSE);
         setMaximizable(true);
         setResizable(true);
-        setClosable(true);
+        setClosable(false);
         setName("Editor");
         setMinimumSize(new Dimension(200,200));
         setPreferredSize(new Dimension(800, 600));
+        setLocation(200,0);
         addFile("default");
         add(pane);
         pack();

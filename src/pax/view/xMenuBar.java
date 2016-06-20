@@ -1,6 +1,12 @@
 package pax.view;
 
 import javax.swing.*;
+import javax.swing.event.MenuEvent;
+import javax.swing.event.MenuListener;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 
 /**
  * This is the Singleton Class for the menubar of the main window(RootFrame). It extends the JMenuBar class is Swing
@@ -9,24 +15,34 @@ import javax.swing.*;
  */
 public class xMenuBar extends JMenuBar {
     /**
-     * MenuItem to be added to MenuBar
+     * Menu to be added to MenuBar
      */
-    private JMenuItem file = new JMenuItem("File");
+    private JMenu file = new JMenu("File");
 
     /**
-     * MenuItem to be added to MenuBar
+     * Menu to be added to MenuBar
      */
-    private JMenuItem window = new JMenuItem("Window");
+    private JMenu window = new JMenu("Window");
 
     /**
-     * MenuItem to be added to MenuBar
+     * Menu to be added to MenuBar
      */
-    private JMenuItem help = new JMenuItem("Help");
+    private JMenu help = new JMenu("Help");
 
     /**
      * This is the array to hold all the Menu Items
      */
-    private JMenuItem[] menuItems = {file, window, help};
+    private JMenu[] menus = {file, window, help};
+
+    /**
+     * MenuItem for window menu to show project tree
+     */
+    JCheckBoxMenuItem showFileTree = new JCheckBoxMenuItem("Project Tree");
+
+    /**
+     * MenuItem for window menu to show Editor window
+     */
+    JCheckBoxMenuItem showEditor = new JCheckBoxMenuItem("Editor Window");
 
     /**
      * Create the instance of the class
@@ -45,6 +61,7 @@ public class xMenuBar extends JMenuBar {
      * Private constructor
      */
     private xMenuBar() {
+        initMenu();
         createMenuItems();
     }
 
@@ -52,8 +69,42 @@ public class xMenuBar extends JMenuBar {
      * This method is called by the private constructor to add the menuitems to the MenuBar. It uses an array of MenuItems intialized by the class.
      */
     private void createMenuItems() {
-        for (JMenuItem items : menuItems) {
+        for (JMenu items : menus) {
             add(items);
         }
+    }
+
+    /**
+     * Initialize Menu selections and add listeners
+     */
+    private void initMenu() {
+        /* init show File tree check box in window menu and add listeners */
+        showFileTree.setSelected(true);
+        window.add(showFileTree);
+        showFileTree.addItemListener(new ItemListener() {
+            @Override
+            public void itemStateChanged(ItemEvent e) {
+                if (e.getStateChange() == ItemEvent.DESELECTED) {
+                    ProjectTreeFrame.getInstance().setVisible(false);
+                }
+                if (e.getStateChange() == ItemEvent.SELECTED){
+                    ProjectTreeFrame.getInstance().setVisible(true);
+                }
+            }
+        });
+        /* init show Editor check box in window menu and add listeners */
+        showEditor.setSelected(true);
+        window.add(showEditor);
+        showEditor.addItemListener(new ItemListener() {
+            @Override
+            public void itemStateChanged(ItemEvent e) {
+                if (e.getStateChange() == ItemEvent.DESELECTED) {
+                    EditorFrame.getInstance().setVisible(false);
+                }
+                if (e.getStateChange() == ItemEvent.SELECTED){
+                    EditorFrame.getInstance().setVisible(true);
+                }
+            }
+        });
     }
 }
