@@ -32,11 +32,23 @@ public class xDesktop extends JDesktopPane {
         setBackground(Color.darkGray);
         setVisible(true);
         addEditorFrame();
+        addProjectTree();
     }
 
+    /**
+     * This adds the Singleton Class EditorFrame to the desktop
+     */
     private void addEditorFrame() {
         add(EditorFrame.getInstance());
         EditorFrame.getInstance().setVisible(true);
+    }
+
+    /**
+     * This adds the Project Viewer to the desktop
+     */
+    private void addProjectTree() {
+        add(ProjectTreeFrame.getInstance());
+        ProjectTreeFrame.getInstance().setVisible(true);
     }
 
 }
