@@ -1,7 +1,10 @@
 package pax.view;
 
+import pax.controller.MissionDirectoryChooser;
+
 import javax.swing.*;
 import java.awt.*;
+import java.io.File;
 
 /**
  * A extension of a JFrame that adds the contents of the Application
@@ -39,6 +42,10 @@ public class RootFrame extends JFrame {
     private final xMenuBar menuBar = xMenuBar.getInstance();
 
     /**
+     * Get the mission Directory from the user using this class
+     */
+    private MissionDirectoryChooser mdc = new MissionDirectoryChooser();
+    /**
      * Constructor for the Application window
      * @author pAxton
      *
@@ -66,6 +73,7 @@ public class RootFrame extends JFrame {
         /* pack evertything up!*/
         pack();
         EditorFrame.getInstance().setVisible(true);
+        mdc.setWorkingDirectory(this);
 
     }
 
@@ -83,4 +91,6 @@ public class RootFrame extends JFrame {
 
 
     }
+
+
 }
