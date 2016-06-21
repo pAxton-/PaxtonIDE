@@ -64,7 +64,7 @@ public class RootFrame extends JFrame {
         /* Do not allow users to resize the window below 200 pixels.*/
         setMinimumSize(new Dimension(minX,minY));
 
-        /* Load componets into the frame */
+        /* Load components into the frame */
         getUIComponets();
 
         /* Set the default size of the application window when opened */
@@ -73,6 +73,8 @@ public class RootFrame extends JFrame {
         /* pack evertything up!*/
         pack();
         EditorFrame.getInstance().setVisible(true);
+
+        /* Show dialog to get the working directory */
         mdc.setWorkingDirectory(this);
 
     }

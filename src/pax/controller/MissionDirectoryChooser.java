@@ -1,5 +1,6 @@
 package pax.controller;
 
+import pax.view.ProjectTreeFrame;
 import pax.view.RootFrame;
 
 import javax.swing.*;
@@ -41,6 +42,7 @@ public class MissionDirectoryChooser {
     private void handleResultOfDialog(RootFrame parent, int returnVal) {
         if (returnVal == JFileChooser.APPROVE_OPTION) {
             setMissionDir(fileChooser.getSelectedFile());
+            ProjectTreeFrame.getInstance().addProjectTree(fileChooser.getSelectedFile());
         } else {
             JOptionPane.showMessageDialog(null,
                     "No Mission/mod Folder Selected!\n              " +

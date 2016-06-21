@@ -2,6 +2,7 @@ package pax.view;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.File;
 
 /**
  * Created by pAxton on 6/19/2016.
@@ -9,6 +10,7 @@ import java.awt.*;
 public class ProjectTreeFrame extends JInternalFrame{
     private ProjectTree tree;
     private static ProjectTreeFrame ourInstance = new ProjectTreeFrame();
+    private File dir;
 
     public static ProjectTreeFrame getInstance() {
         return ourInstance;
@@ -23,8 +25,16 @@ public class ProjectTreeFrame extends JInternalFrame{
         setTitle("Project Tree");
         setMinimumSize(new Dimension(200,200));
         setPreferredSize(new Dimension(200, 500));
-        tree = new ProjectTree();
-        add(tree);
+
         pack();
+    }
+
+    public void setDir(File dir) {
+        this.dir = dir;
+    }
+
+    public void addProjectTree(File dir) {
+        tree = new ProjectTree(dir);
+        add(tree);
     }
 }
