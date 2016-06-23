@@ -12,5 +12,5 @@ This is a open source project
 
 I have alot planned and alot to come
 
-This project makes use of the [RSyntaxTextArea](https://github.com/bobbylight/RSyntaxTextArea) library, by [Bobby Light](https://github.com/bobbylight), and is provided under a [Modified BSD License](./libs/RSyntaxTextArea.License.txt).
+This project makes use of the [RSyntaxTextArea](https://github.com/bobbylight/RSyntaxTextArea) library, by [Bobby Light](https://github.com/bobbylight), and is provided under a [Modified BSD License](./src/main/resources/RSyntaxTextArea.License.txt).
 
