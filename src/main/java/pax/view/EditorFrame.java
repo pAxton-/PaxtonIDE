@@ -49,8 +49,8 @@ public class EditorFrame extends JInternalFrame {
         setLocation(200,0);
 
         addFile("default");
-        pane.getViewport().add(tabbedPane);
-        add(pane);
+
+        add(tabbedPane);
         pack();
     }
 
@@ -60,7 +60,6 @@ public class EditorFrame extends JInternalFrame {
      */
     public void addFile(String filename)
     {
-        tabbedPane.add(filename, new EditorFile());
-
+        tabbedPane.add( new RTextScrollPane(new EditorFile()));
     }
 }

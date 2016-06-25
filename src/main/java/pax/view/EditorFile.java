@@ -14,6 +14,8 @@ public class EditorFile extends RSyntaxTextArea {
     public EditorFile() {
         super();
         setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_ACTIONSCRIPT);
+        ;
+        setCodeFoldingEnabled(true);
         setEditable(true);
 
     }
