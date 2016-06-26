@@ -69,12 +69,9 @@ public class ProjectTreeMouseListener implements MouseListener {
             System.out.println(path.toString());
             StringBuilder sb = new StringBuilder();
             sb.append(EditorFrame.getInstance().getMissionDir());
-          // for(int i = 0;i < path.getPathCount();i++) {
-
-                    sb.append(File.separatorChar).append(path.getPathComponent(1).toString());
-
-
-           // }
+           for(int i = 1;i < path.getPathCount();i++) {
+                    sb.append(File.separatorChar).append(path.getPathComponent(i).toString());
+            }
 
             file = sb.toString();
 
