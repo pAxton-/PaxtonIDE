@@ -1,13 +1,16 @@
 package pax.view;
 
+import pax.controller.ProjectTreeMouseListener;
+
 import javax.swing.*;
+import javax.swing.event.TreeModelEvent;
+import javax.swing.event.TreeModelListener;
 import javax.swing.tree.*;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.DirectoryIteratorException;
-import java.nio.file.DirectoryStream;
-import java.nio.file.Files;
-import java.nio.file.Path;
+import java.nio.file.*;
 import java.util.ArrayList;
 
 /**
@@ -26,10 +29,12 @@ public class ProjectTree extends JTree {
      */
     public ProjectTree(File missionDir) {
         super();
-        missionRoot = createNodes(missionDir);
+        Path dir = missionDir.toPath();
+        missionRoot = createNodes(dir);
         DefaultTreeModel dtm = new DefaultTreeModel(missionRoot);
         setModel(dtm);
         setVisible(true);
+        addMouseListener(new ProjectTreeMouseListener(this));
 
     }
 
@@ -37,23 +42,32 @@ public class ProjectTree extends JTree {
      * Create the project tree with the mission directory
      * @param missionDir
      */
-    private TreeNode createNodes(File missionDir) {
+    private TreeNode createNodes(Path missionDir) {
         DefaultMutableTreeNode root = null;
-        ArrayList<DefaultMutableTreeNode> nodes = new ArrayList<>();
-        Path dir = missionDir.toPath();
+        ArrayList<TreeNode> nodes = new ArrayList<>();
+        Path dir = missionDir;
+       // File dir = missionDir;
+
 
         try (DirectoryStream<Path> stream = Files.newDirectoryStream(dir)) {
 
-            System.out.println(dir.getNameCount());
+
             int i = 0;
             for (Path file: stream) {
+
                 if (i == 0) {
-                    root = new DefaultMutableTreeNode("Mission Folder");
+                    root = new DefaultMutableTreeNode(file.getParent().getFileName());
                 }
+                File f = file.toFile();
 
-                    nodes.add(new DefaultMutableTreeNode(file.getFileName()));
 
-                i++;
+                if(f.isDirectory()) {
+                    TreeNode nextDir = createNodes(f.toPath());
+                   nodes.add(nextDir);
+                } else {
+                    nodes.add(new DefaultMutableTreeNode(f.getName()));
+                }
+               i++;
             }
         } catch (IOException | DirectoryIteratorException x) {
             // IOException can never be thrown by the iteration.
@@ -61,8 +75,9 @@ public class ProjectTree extends JTree {
             System.err.println(x);
         }
 
-        for (DefaultMutableTreeNode nd : nodes) {
-            root.add(nd);
+        for (TreeNode nd : nodes) {
+
+            root.add((DefaultMutableTreeNode)nd);
         }
 
         return root;

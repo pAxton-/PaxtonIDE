@@ -4,7 +4,6 @@ import pax.controller.MissionDirectoryChooser;
 
 import javax.swing.*;
 import java.awt.*;
-import java.io.File;
 
 /**
  * A extension of a JFrame that adds the contents of the Application
@@ -76,6 +75,7 @@ public class RootFrame extends JFrame {
 
         /* Show dialog to get the working directory */
         mdc.setWorkingDirectory(this);
+        EditorFrame.getInstance().setMissionDirectory(mdc.getMissionDir());
 
     }
 
@@ -93,6 +93,8 @@ public class RootFrame extends JFrame {
 
 
     }
+
+
 
 
 }
