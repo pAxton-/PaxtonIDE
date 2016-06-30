@@ -3,7 +3,6 @@ package pax.controller;
 import pax.view.EditorFrame;
 
 import javax.swing.*;
-import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.TreePath;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -24,6 +23,7 @@ public class ProjectTreeMouseListener implements MouseListener {
     public ProjectTreeMouseListener(JTree tree) {
         this.tree = tree;
     }
+
     @Override
     public void mouseClicked(MouseEvent e) {
 
@@ -65,6 +65,7 @@ public class ProjectTreeMouseListener implements MouseListener {
      */
     private void doubleClick(int row, TreePath path) {
         System.out.println(path.toString());
+
         try {
             System.out.println(path.toString());
             StringBuilder sb = new StringBuilder();
